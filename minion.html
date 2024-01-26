@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Marquee Example</title>
+  <style>
+    .marquee-container {
+      display: flex;
+      overflow: hidden;
+    }
+
+    .marquee {
+      white-space: nowrap;
+      overflow: hidden;
+      position: relative;
+      animation: marquee 10s linear infinite;
+      margin-right: 10px;
+    }
+
+    @keyframes marquee {
+      0%   { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
+    }
+  </style>
+</head>
+<body>
+
+<div id="marqueeContainer" class="marquee-container">
+  <div class="marquee" id="marquee1">
+    <p>This is the first marquee!</p>
+  </div>
+</div>
+
+<input type="text" id="newName" placeholder="Enter a new name">
+<button onclick="addNewMarquee()">Add Marquee</button>
+
+<script>
+     var newName = document.getElementById('newName').value;
+  function addNewMarquee(newName) {
+   
+    if (newName.trim() !== '') {
+      var marqueeContainer = document.getElementById('marqueeContainer');
+
+      var newMarquee = document.createElement('div');
+      newMarquee.classList.add('marquee');
+      newMarquee.innerHTML = '<p>' + newName + '</p>';
+
+      marqueeContainer.appendChild(newMarquee);
+
+      // Clear input field
+      document.getElementById('newName').value = '';
+
+      // Get the animation duration in milliseconds
+      var animationDuration = parseFloat(getComputedStyle(newMarquee).animationDuration) * 1000;
+
+      // Remove the new marquee after the animation duration
+      setTimeout(function() {
+        marqueeContainer.removeChild(newMarquee);
+      }, animationDuration);
+    }
+  }
+</script>
+
+</body>
+</html>
