@@ -21,8 +21,10 @@ let isReading = false;
         }
     }
 
-let backendUrl = location.protocol === 'file:' ? "https://tiktok-chat-reader.zerody.one/" : undefined;
-let connection = new TikTokIOConnection(backendUrl);
+let backendUrl = "https://tiktok-chat-reader.zerody.one/";
+    if (window.location.protocol === 'http:') {
+        backendUrl = "http://tiktok-chat-reader.zerody.one/";
+    }
 
 // Counter
 let viewerCount = 0;
